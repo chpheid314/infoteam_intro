@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #blackboard {
+            position: absolute;
+            left: 150px;
+            top: 100px;
+        }
+        #character {
+            position: relative;
+            display: inline-block;
+            left: 800px;
+            top: 350px;
+            animation: bounce 0.7s infinite alternate ease-in-out;
+        }
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-15px);
+            }
+        }
+        .blackboard_text {
+            position: absolute;
+            color: white;
+            transform: translate(-50%, -50%);
+        }
+        #text_01 {
+            top: 12%;
+            left: 50%;
+            font-size: 44px;
+            font-weight: bold;
+            white-space: nowrap;
+            text-align: center;
+        }
+        #text_02 {
+            top: 45%;
+            left: 50%;
+            font-size: 24px;
+            font-weight: lighter;
+            white-space: normal;
+            width: 60%;
+            max-width: 600px;
+            text-align: left;
+        }
+        .social_links {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 60px;
+            visibility: hidden;
+        }
+        .social_links img {
+            cursor: pointer;
+        }
+        .page_change {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        #left_mark, #right_mark {
+            width: 30px;
+            cursor: pointer;
+        }
+        #page_num {
+            position: relative;
+            top: -5px;
+            font-size: 24px;
+            font-weight: lighter;
+            color: white;
+            text-align: center;
+        }
+        #music_mark {
+            position: absolute;
+            top: 50px;
+            right: 70px;
+            cursor: pointer;
+        }
+        .speech_bubble {
+            position: absolute;
+            top: 200px;
+            left: 1000px;
+            display: inline-block;
+            padding: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            color: black;
+            visibility: hidden;
+        }
+        .speech_bubble::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 60%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 20px solid white;
+        }
+        #character:hover {
+            filter: drop-shadow(0 0 5px white) drop-shadow(0 0 5px white) drop-shadow(0 0 5px white);
+        }
+        #character:hover + .speech_bubble {
+            visibility: visible;
+        }
+    </style>
+
+</head>
+<body style="background-image:url('https://github.com/chpheid314/test_02/blob/main/image/Universe.jpg?raw=true')">
+    <div id="blackboard">
+        <img src="https://github.com/chpheid314/test_02/blob/main/image/blackboard.png?raw=true" width="800px">
+        <p class="blackboard_text" id="text_01">유주원</p>
+        <p class="blackboard_text" id="text_02">웹 개발 초보입니다. 프론트엔드 개발자를 지망하고 있습니다!</p>
+        <div class="blackboard_text page_change">
+            <div id="left_mark">
+                <img src="https://github.com/chpheid314/test_02/blob/main/image/left_mark.png?raw=true" width="30px">
+            </div>
+            <p id="page_num">1/3</p>
+            <div id="right_mark">
+                <img src="https://github.com/chpheid314/test_02/blob/main/image/right_mark.png?raw=true" width="30px">
+            </div>
+            <div class="social_links">
+                <a id="instagram_link" href="https://www.instagram.com/pi_reverse?igsh=MWhpbzdhZHdtdmVoYQ==" target="_blank">
+                    <img id="instagram_logo" src="https://github.com/chpheid314/test_02/blob/main/image/instagram_logo.png?raw=true" width="90px">
+                </a>
+                <a id="github_link" href="https://github.com/chpheid314" target="_blank">
+                    <img id="github_logo" src="https://github.com/chpheid314/test_02/blob/main/image/github_logo.png?raw=true" width="90px">
+                </a>
+            </div>            
+        </div>
+    </div>
+    <div id="character">
+        <img src="https://github.com/chpheid314/test_02/blob/main/image/Character.png?raw=true" width="400px">
+    </div>
+    <div class="speech_bubble">
+        반가워요!
+    </div>
+    <audio id="bgm" loop>
+        <!-- Thinking About The Universe - Nat Keefe & BeatMower.mp3 -->
+        <source src="https://buckettest-0001.s3.eu-north-1.amazonaws.com/bgm.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div id="music_mark">
+        <img src="https://github.com/chpheid314/test_02/blob/main/image/music_off.png?raw=true" width="70px">
+    </div>
+    <script>
+        const pages = [
+            { title: "유주원(Yoo Juwon)", content: "웹 개발 초심자입니다! 프론트엔드 개발자를 지망하고 있습니다. 열심히 활동해서 많이 배우고 싶어요 :D" },
+            { title: "TMI들", content: "MBTI: INTP<br>취미: 노래, 웹소 읽기, 게임, 애니메이션<br>특이사항: 안예은을 많이 좋아합니다!"},
+            { title: "링크", content: "" }
+        ];
+    
+        let currentPage = 0;
+    
+        const text01 = document.getElementById("text_01");
+        const text02 = document.getElementById("text_02");
+        const pageNum = document.getElementById("page_num");
+        const leftMark = document.getElementById("left_mark");
+        const rightMark = document.getElementById("right_mark");
+        const socialLinks = document.querySelector(".social_links"); 
+        const instagramLink = document.getElementById("instagram_link");
+        const githubLink = document.getElementById("github_link");
+        const instagramLogo = document.getElementById("instagram_logo");
+        const githubLogo = document.getElementById("github_logo");
+    
+        function updatePage() {
+            text01.innerHTML = pages[currentPage].title;
+            text02.innerHTML = pages[currentPage].content;
+            pageNum.textContent = `${currentPage + 1}/${pages.length}`;
+            socialLinks.style.visibility = currentPage === pages.length - 1 ? "visible" : "hidden";
+        }
+    
+        leftMark.addEventListener("click", function () {
+            if (currentPage > 0) {
+                currentPage--;
+                updatePage();
+            }
+        });
+    
+        rightMark.addEventListener("click", function () {
+            if (currentPage < pages.length - 1) {
+                currentPage++;
+                updatePage();
+            }
+        });
+    
+        updatePage();
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const musicButton = document.getElementById("music_mark");
+            const musicIcon = musicButton.querySelector("img");
+            const bgm = document.getElementById("bgm");
+
+            let isPlaying = false;
+
+            musicButton.addEventListener("click", function () {
+                if (!isPlaying) {
+                    try {
+                        bgm.play().then(() => {
+                            musicIcon.src = "https://github.com/chpheid314/test_02/blob/main/image/music_on.png?raw=true";
+                            isPlaying = true;
+                        }).catch(error => {
+                            console.error("음악 재생에 실패했습니다: ", error);
+                        });
+                    } catch (error) {
+                        console.error("음악 재생 오류: ", error);
+                    }
+                } else {
+                    bgm.pause();
+                    musicIcon.src = "https://github.com/chpheid314/test_02/blob/main/image/music_off.png?raw=true";
+                    isPlaying = false;
+                }
+            });
+        });
+
+    </script>    
+</body>
+</html>
